@@ -1,0 +1,69 @@
+<!-- <div class="alert alert-danger" *ngIf="errorMsg">
+  {{errorMsg}}
+</div>
+<div class="alert alert-success" *ngIf="successMsg">
+  {{successMsg}}
+</div> -->
+
+<mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <span>{{service.form.controls['id'].value?"تعديل بيانات العميل":"ادخال عميل جديد"}}</span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+  </mat-toolbar>
+
+<form [formGroup]="service.form" (ngSubmit)="onFormSubmit()" class="normal-form">
+    <mat-grid-list cols="2" rowHeight="300px">
+      <mat-grid-tile>
+        <div class="controles-container">
+          <input type="hidden" formControlName="id">
+          <mat-form-field style="text-align: right">
+            <input formControlName="name" matInput placeholder="*الاسم بالكامل">
+            <mat-error>This field is mandatory.</mat-error>
+          </mat-form-field>
+          <mat-form-field style="text-align: right">
+            <input formControlName="email" matInput placeholder="الايميل">
+            <mat-error>Invalid email address.</mat-error>
+          </mat-form-field>
+          <mat-form-field style="text-align: right">
+            <input formControlName="phoneNumber" matInput placeholder="*رقم الهاتف">
+            <mat-error *ngIf="service.form.controls['phoneNumber'].errors?.required">This field is mandatory.</mat-error>
+            <mat-error *ngIf="service.form.controls['phoneNumber'].errors?.minlength">Minimum 8 charactors needed.</mat-error>
+          </mat-form-field>
+          <mat-form-field style="text-align: right">
+            <input formControlName="city" matInput placeholder="المدينه">
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+          <div class="add-bottom-padding">
+            <mat-radio-group formControlName="gender" class="float-right" >
+                <mat-radio-button value="انثى">انثى</mat-radio-button>
+              <mat-radio-button value="ذكر">ذكر</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <mat-form-field style="text-align: right">
+            <mat-select formControlName="humanResourceType" placeholder="*من فضلك اختر النوع">
+              <!-- <mat-option>None</mat-option> -->
+              <ng-container *ngFor="let humanResourceType of humanResourceTypes">
+                <mat-option value="{{humanResourceType.value}}">{{humanResourceType.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field style="text-align: right">
+            <input formControlName="firstContact" matInput [matDatepicker]="picker" placeholder="*تاريخ بدايه التعامل">
+            <mat-datepicker-toggle matSuffix [for]="picker"  ></mat-datepicker-toggle>
+            <mat-datepicker #picker   ngDefaultControl disabled="false"></mat-datepicker>
+          </mat-form-field>
+          <div class="add-bottom-padding">
+            <mat-checkbox style="text-align: right" class="float-right" formControlName="isPermanent">دوام كامل</mat-checkbox>
+          </div>
+          <div class="button-row">
+              <!-- [disabled]="service.form.invalid" -->
+            <button mat-raised-button color="primary" type="submit" >حفظ</button>
+            <button id='buttonReset' mat-raised-button color="warn" type="reset" >مسح الكل</button>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>

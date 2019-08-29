@@ -1,0 +1,72 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- [mode]="(isHandset$ | async) ? 'over' : 'side'" -->
+  <!-- [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+   [opened]="!(isHandset$ | async)"
+  -->
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false" position="end"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="false">
+    <mat-toolbar>القائمه</mat-toolbar>
+    <mat-nav-list class="float-right">
+      <button mat-button [matMenuTriggerFor]="menu"><img class="left-angle-style" style="direction: rtl"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAPFBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACHr/7WAAAAE3RSTlMAK8DozWNkFf0SZw8oYLL+6dEmcxEPXQAAAGVJREFUSMft1MsOQDAQRuEqrbpf5v3flQQLDeJYiMSc/ZdJu/iN0bRdTU2FD31ChQgzZSdzLbwhkhUqviSGMT+vOhLXWSwi4ji5ZSKyGvL8zZBPVvOm4aO03EnhXLpAxZMZ1/7SBCzqFTK+FUtSAAAAAElFTkSuQmCC">
+        قائمه فرعيه</button>
+
+
+      <mat-menu style="direction: rtl"  #menu="matMenu">
+        <a style="direction: rtl" mat-menu-item routerLink="/categories" routerLinkActive="active" (click)="drawer.toggle()">الاصناف</a>
+        <a style="direction: rtl" mat-menu-item routerLink="/humanResources" routerLinkActive="active" (click)="drawer.toggle()">العملاء
+          والموظفين</a>
+        <a style="direction: rtl" mat-menu-item routerLink="/empworkhoursandsalary" routerLinkActive="active" (click)="drawer.toggle()">ساعات
+          العمل للموظف والمرتب</a>
+
+      </mat-menu>
+
+
+      <a style="direction: rtl" mat-list-item routerLink="/deceased" routerLinkActive="active" (click)="drawer.toggle()">الهالك</a>
+      
+
+      <a style="direction: rtl" mat-list-item routerLink="/otherexpenses" routerLinkActive="active" (click)="drawer.toggle()">مصروفات اخرى</a>
+
+      <a style="direction: rtl" mat-list-item routerLink="/purchases" routerLinkActive="active" (click)="drawer.toggle()">المشتريات</a>
+
+      <a style="direction: rtl" mat-list-item routerLink="/sales" routerLinkActive="active" (click)="drawer.toggle()">المبيعات</a>
+
+      <a style="direction: rtl" mat-list-item routerLink="/mfrpfctc" routerLinkActive="active" (click)="drawer.toggle()">مصنعيه تجهيزات
+        المنتج</a>
+      <a style="direction: rtl" mat-list-item routerLink="/employeeancestor" routerLinkActive="active" (click)="drawer.toggle()"> سلف الموظف</a>
+
+      
+      <a style="direction: rtl" mat-list-item routerLink="/employeetimetracker" routerLinkActive="active" (click)="drawer.toggle()"> تتبع الوقت</a>
+      <a style="direction: rtl" mat-list-item routerLink="/bill" routerLinkActive="active" (click)="drawer.toggle()"> طباعه الفاتوره</a>
+      <a style="direction: rtl" mat-list-item routerLink="/summary" routerLinkActive="active" (click)="drawer.toggle()"> كشف الحساب </a>
+
+      
+      <a mat-list-item routerLink="/login" routerLinkActive="active" (click)="logOut(drawer)">خروج</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- *ngIf="isHandset$ | async" -->
+    <mat-toolbar color="primary" class="float-right">
+      <mat-toolbar-row>
+        <span class="example-spacer"></span>
+        <span>   برنامج حسابات لشركه عاطف قنديل لتصنيع خيوط الشانيليا </span>
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+          *ngIf="isAuthorized">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <!-- for production -->
+    <app-login (isAuthorized)='isAuthorized=$event' *ngIf='!isAuthorized'></app-login>
+    <div id="imageContainer" *ngIf='isAuthorized'>
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- for test -->
+    <!-- <app-manufacturers-ofproductfittings-create></app-manufacturers-ofproductfittings-create> -->
+    <!-- <app-item-repeater></app-item-repeater> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

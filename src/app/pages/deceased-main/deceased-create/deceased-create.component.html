@@ -1,0 +1,38 @@
+
+<mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <span>{{service.form.controls['id'].value?"تعديل هالك":"ادخال هالك"}}</span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+        <mat-icon>clear</mat-icon>
+    </button>
+</mat-toolbar>
+
+<form [formGroup]="service.form" (ngSubmit)="onFormSubmit()" class="normal-form">
+    <mat-grid-list cols="2" rowHeight="300px">
+        <mat-grid-tile>
+            <div class="controles-container">
+                <input type="hidden" formControlName="id">
+
+         
+                <mat-form-field style="text-align: right">
+                    <input type="number" formControlName="price" matInput placeholder="السعر">
+                </mat-form-field>
+
+                <mat-form-field style="text-align: right">
+                    <input formControlName="typeOfPiecesConsumed" matInput placeholder="نوع القطع المستهلكه">
+                </mat-form-field>
+
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="controles-container">
+
+                <div class="button-row">
+                    <!-- [disabled]="service.form.invalid" -->
+                    <button mat-raised-button color="primary" type="submit">حفظ</button>
+                    <button id='buttonReset' mat-raised-button color="warn" type="reset">مسح الكل</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>

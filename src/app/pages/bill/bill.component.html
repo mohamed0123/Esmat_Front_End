@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="mainContainer">
+                <form [formGroup]="orderForm" class="example-form">
+                    <button mat-icon-button color="primary" (click)="addItem()">+</button>
+
+                    <mat-form-field>
+                        <mat-label>الصنف</mat-label>
+                        <mat-select formControlName="name">
+                            <mat-option *ngFor="let cat of categeoriesALL" [value]="cat.category">
+                                {{cat.category}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br />
+                    <input type="number" formControlName="price" matInput placeholder="price">
+
+                    <div class="containerColumn">
+
+                        <div formArrayName="items" *ngFor="let item of orderForm.get('items')['controls']; let i = index;">
+                            <div [formGroupName]="i">
+                                <input type="number" formControlName="numberofkillos" matInput placeholder="killos">
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+<br>
+<br>
+<mat-toolbar>
+    <span class="fill-remaining-space"></span>
+</mat-toolbar>
+<mat-toolbar>
+    <span class="fill-remaining-space"></span>
+
+<div class="col-sm">
+    <input type="number"  [(ngModel)]="incomingMoneyCurrent" matInput placeholder="وارد">
+</div>
+
+    <button mat-fab color="primary" (click)="save()">
+            حفظ
+       </button>
+
+       <button mat-fab color="primary" (click)="printDiv('test')">
+        اطبع
+   </button> 
+   
+    <span>طباعه الفاتوره</span>
+ 
+
+    <mat-form-field style="text-align: right">
+        <input matInput placeholder='اسم العميل' name="factoryName" #factoryName="ngModel"
+            [(ngModel)]="searcedItem" #inputHr matInput [matAutocomplete]="autoHR"
+            (ngModelChange)="doFilter(inputHr.value)">
+
+
+        <mat-autocomplete #autoHR="matAutocomplete" (optionSelected)="_setSearcedItem($event.option.value)">
+            <mat-option *ngFor="let hr of humanResourcesInnerList  " [value]="hr['name']">
+                {{hr['name']}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <span class="fill-remaining-space"></span>
+</mat-toolbar>
+
+
+<div id="test">
+    <div class="container" style="direction: rtl">
+        <div class="row">
+            <div class="col-8"></div>
+            <table>
+
+                <tbody>
+                    <tr>
+                        <td class="text-right">الكميه </td>
+                        <td class="text-right">{{billSummary.totalNumberofkillos}}</td>
+
+                    </tr>
+                    <tr>
+                        <td class="text-right">الاجمالى</td>
+                        <td class="text-right">{{billSummary.totalPrice}}</td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="text-right">عدد الشكاير</td>
+                        <td class="text-right">{{billSummary.cicarhCount}}</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div id='parent' class="row">
+
+            <div class="col-2">
+
+                <app-bill [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 0)'></app-bill>
+
+            </div>
+
+
+
+            <div class="col-2">
+
+                <app-bill  [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 1)'></app-bill>
+
+            </div>
+
+
+            <div class="col-2">
+
+                <app-bill  [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 2)'></app-bill>
+
+            </div>
+
+            <div class="col-2">
+
+                <app-bill  [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 3)'></app-bill>
+
+            </div>
+
+            <div class="col-2">
+
+                <app-bill  [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 4)'></app-bill>
+
+            </div>
+
+
+            <div class="col-2">
+
+                <app-bill  [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 5)'></app-bill>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

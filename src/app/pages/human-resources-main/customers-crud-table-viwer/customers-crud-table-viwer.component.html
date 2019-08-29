@@ -1,0 +1,119 @@
+<div class="search-div" >
+       
+    <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off"
+            (keyup)="applyFilter($event.target.value)">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <button mat-raised-button (click)="onCreate()">
+            <mat-icon>add</mat-icon>اضافه عميل
+        </button>
+        <button mat-button matSuffix mat-icon-button (click)="exportAsXLSX()"> <div class="icons8-microsoft-excel"></div> </button>
+        <button mat-button matSuffix mat-icon-button (click)="loadData()"> <mat-icon style="color:green">autorenew</mat-icon> </button>
+    
+        <span class="fill-remaining-space"></span>
+</div>
+
+
+
+<div class="mat-elevation-z8">
+
+    <!-- <div class="alert alert-danger" *ngIf="errorMsg">
+        {{errorMsg}}
+    </div>
+    <div class="alert alert-success" *ngIf="successMsg">
+        {{successMsg}}
+    </div> -->
+
+    <!-- <mat-card-title class="float-right">
+        <div>العمال والزبائن</div>
+        <mat-divider></mat-divider>
+    </mat-card-title> -->
+
+    <mat-table [dataSource]="dataArray" matSort >
+        <ng-container matColumnDef="UPDATE">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-icon-button (click)="onEdit(row)">
+                    <mat-icon>launch</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="onDelete(row.id)">
+                    <mat-icon>delete_outline</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="PAGE_NO">
+            <mat-header-cell *matHeaderCellDef>تاريخ بداية التعامل</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{  element.firstContact | date: 'dd-MMM-yyyy hh:mm'}}
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="LINE_NO">
+            <mat-header-cell *matHeaderCellDef>النوع</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{  element.humanResourceType }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="LINES_COUNT">
+            <mat-header-cell *matHeaderCellDef>المدينه</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{  element.city }}
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="FEATURE">
+            <mat-header-cell *matHeaderCellDef>رقم الهاتف</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{  element.phoneNumber }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="TEAM">
+            <mat-header-cell *matHeaderCellDef>الايميل</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{  element.email }}
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="GENDER">
+            <mat-header-cell *matHeaderCellDef>نوع</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{  element.gender }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="STATUS">
+            <mat-header-cell *matHeaderCellDef>الاسم بالكامل</mat-header-cell>
+            <mat-cell *matCellDef="let element ; let i = index">
+                {{  element.name }}
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="loading">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                  Loading data...
+                </mat-footer-cell>
+              </ng-container>
+              <ng-container matColumnDef="noData">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                  No data.
+                </mat-footer-cell>
+              </ng-container>
+
+
+        <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataArray!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataArray!=null && dataArray.data.length==0)}"></mat-footer-row>
+    
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15 , 20 , 50 , 100]" [pageSize]="20" showFirstLastButtons></mat-paginator>
+
+</div>

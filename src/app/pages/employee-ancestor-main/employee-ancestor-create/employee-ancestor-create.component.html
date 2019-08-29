@@ -1,0 +1,56 @@
+<mat-toolbar>
+    <span class="fill-remaining-space"></span>
+    <span>{{service.form.controls['id'].value?"تعديل سلف الموظف":"ادخال سلف الموظف"}}</span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+        <mat-icon>clear</mat-icon>
+    </button>
+</mat-toolbar>
+
+<form [formGroup]="service.form" (ngSubmit)="onFormSubmit()" class="normal-form">
+    <mat-grid-list cols="1" rowHeight="300px">
+        <!-- <mat-grid-tile>
+            <div class="controles-container">
+              
+
+
+            </div>
+
+
+        </mat-grid-tile> -->
+        <mat-grid-tile>
+            <div class="controles-container">
+
+                <input type="hidden" formControlName="id">
+
+                <!-- <form #f="ngForm"> -->
+                <mat-form-field style="text-align: right">
+                    <input placeholder='اسم العميل' formControlName="employeeWorkHourSalary" #inputHr matInput
+                        [matAutocomplete]="autoHR" (ngModelChange)="doFilter(inputHr.value)">
+
+
+                    <mat-autocomplete #autoHR="matAutocomplete">
+                        <mat-option *ngFor="let hr of humanResourcesInnerList  " [value]="hr['humanResources']['name']">
+                            {{hr['humanResources']['name']}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <!-- </form> -->
+
+                <mat-form-field style="text-align: right">
+                    <input type="number" formControlName="ancestor" matInput placeholder="السلفه بالجنيه">
+                </mat-form-field>
+
+                <div class="add-bottom-padding">
+                    <mat-checkbox style="text-align: right" class="float-right" formControlName="isStillNotPaid">هل سدد
+                        السلفه</mat-checkbox>
+                </div>
+
+                <div class="button-row">
+                    <!-- [disabled]="service.form.invalid" -->
+                    <button mat-raised-button color="primary" type="submit">حفظ</button>
+                    <button id='buttonReset' mat-raised-button color="warn" type="reset">مسح الكل</button>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>
