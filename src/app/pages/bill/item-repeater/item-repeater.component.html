@@ -6,25 +6,24 @@
 <mat-toolbar>
     <span class="fill-remaining-space"></span>
 
-<div class="col-sm">
-    <input type="number"  [(ngModel)]="incomingMoneyCurrent" matInput placeholder="وارد">
-</div>
+    <div class="col-sm">
+        <input type="number" [(ngModel)]="incomingMoneyCurrent" matInput placeholder="وارد">
+    </div>
 
     <button mat-fab color="primary" (click)="save()">
-            حفظ
-       </button>
+        حفظ
+    </button>
 
-       <button mat-fab color="primary" (click)="printDiv('test')">
+    <button mat-fab color="primary" (click)="printDiv('test')">
         اطبع
-   </button> 
-   
+    </button>
+
     <span>طباعه الفاتوره</span>
- 
+
 
     <mat-form-field style="text-align: right">
-        <input matInput placeholder='اسم العميل' name="factoryName" #factoryName="ngModel"
-            [(ngModel)]="searcedItem" #inputHr matInput [matAutocomplete]="autoHR"
-            (ngModelChange)="doFilter(inputHr.value)">
+        <input matInput placeholder='اسم العميل' name="factoryName" #factoryName="ngModel" [(ngModel)]="searcedItem"
+            #inputHr matInput [matAutocomplete]="autoHR" (ngModelChange)="doFilter(inputHr.value)">
 
 
         <mat-autocomplete #autoHR="matAutocomplete" (optionSelected)="_setSearcedItem($event.option.value)">
@@ -45,16 +44,31 @@
             <table>
 
                 <tbody>
+
+
+                    <tr>
+                        <td class="text-right">الحساب السابق للعميل </td>
+                        <td class="text-right">{{previousTotalPrice}}</td>
+
+                    </tr>
+
+
                     <tr>
                         <td class="text-right">الكميه </td>
                         <td class="text-right">{{billSummary.totalNumberofkillos}}</td>
 
                     </tr>
                     <tr>
-                        <td class="text-right">الاجمالى</td>
+                        <td class="text-right"> الاجمالى بدون الحساب السابق</td>
                         <td class="text-right">{{billSummary.totalPrice}}</td>
 
                     </tr>
+
+                    <tr>
+                            <td class="text-right"> الاجمالى بالحساب السابق</td>
+                            <td class="text-right">{{billSummary.totalPrice + previousTotalPrice}}</td>
+    
+                        </tr>
 
                     <tr>
                         <td class="text-right">عدد الشكاير</td>
@@ -81,33 +95,33 @@
 
             <div class="col-2">
 
-                <app-bill  [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 1)'></app-bill>
+                <app-bill [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 1)'></app-bill>
 
             </div>
 
 
             <div class="col-2">
 
-                <app-bill  [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 2)'></app-bill>
+                <app-bill [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 2)'></app-bill>
 
             </div>
 
             <div class="col-2">
 
-                <app-bill  [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 3)'></app-bill>
+                <app-bill [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 3)'></app-bill>
 
             </div>
 
             <div class="col-2">
 
-                <app-bill  [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 4)'></app-bill>
+                <app-bill [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 4)'></app-bill>
 
             </div>
 
 
             <div class="col-2">
 
-                <app-bill  [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 5)'></app-bill>
+                <app-bill [categeoriesALL]='categeoriesALL' (resChangedOut)='setResChangedOut($event , 5)'></app-bill>
 
             </div>
 

@@ -212,6 +212,14 @@ export class EnrollmentService {
     return this.http.post<any>(`${this.sales}ByHR` , hr).pipe(catchError(this.errorHandler));
   }
 
+
+  getPreviousTotalPriceForHr(hr): Observable<any> {
+    console.log(`${this.sales}previoustotalpriceforhr`)
+    return this.http.post<any>(`${this.sales}previoustotalpriceforhr` , hr).pipe(catchError(this.errorHandler));
+  }
+
+  
+
   getAllSalesByHrAndDate(hrP, startDateP , endDateP): Observable<any> {
     console.log(`${this.sales}ByHRAndDate`)
     this.SalesObj  = {hr :hrP ,startDate:startDateP , endDate:endDateP }

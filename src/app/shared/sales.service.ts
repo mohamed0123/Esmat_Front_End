@@ -84,6 +84,11 @@ export class SalesService {
     return this.enroll.getAllSalesByHr(hr)
   }
 
+
+  getPreviousTotalPriceForHr(hr){
+    return this.enroll.getPreviousTotalPriceForHr(hr)
+  }
+
   getAllSalesByHrAndDate(hr , startDate, endDate) {
 
     return this.enroll.getAllSalesByHrAndDate(hr , startDate , endDate)

@@ -19,8 +19,10 @@ export class ItemRepeaterComponent implements OnInit {
   humanResourcesInnerList;
   searcedItem;
   hrRow;
-  incomingMoneyCurrent   ;
+  incomingMoneyCurrent;
   searchKey;
+
+  previousTotalPrice = 0;
   // @Output()
   // categeoriesALL = new EventEmitter();
   constructor(private catservice: CategoriesService, private hrservice: HumanResourcesService, private notificationService: NotificationService
@@ -41,9 +43,22 @@ export class ItemRepeaterComponent implements OnInit {
         console.table(this.humanResourcesAllType)
         this.searcedItem = data[0].name
         this.hrRow = data[0]
+        this.setTotalPrice() ;
+
       }
     )
 
+  }
+
+
+  setTotalPrice() {
+
+    if (this.hrRow)
+      this.salesService.getPreviousTotalPriceForHr(this.hrRow).subscribe(
+        data => {
+          this.previousTotalPrice = data
+        }
+      )
   }
 
   setResChangedOut(val, idx) {
@@ -206,15 +221,26 @@ export class ItemRepeaterComponent implements OnInit {
        <table>
 
  <tbody>
+    <tr>
+        <td class="text-right">الحساب السابق للعميل </td>
+        <td class="text-right">${this.previousTotalPrice}</td>
+
+    </tr>
+
      <tr>
          <td class="text-right">الكميه </td>
          <td class="text-right">${this.billSummary.totalNumberofkillos} </td>
 
      </tr>
      <tr>
-         <td class="text-right">الاجمالى</td>
+         <td class="text-right"> الاجمالى بدون الحساب السابق</td>
          <td class="text-right">${this.billSummary.totalPrice} </td>
 
+     </tr>
+
+     <tr>
+        <td class="text-right"> الاجمالى بالحساب السابق</td>
+        <td class="text-right">${this.billSummary.totalPrice + this.previousTotalPrice} </td>
      </tr>
 
      <tr>
@@ -287,6 +313,14 @@ export class ItemRepeaterComponent implements OnInit {
       // console.table( price , category , noOfKilllos )
       categoryObj = this.filterExactCat(this.categeoriesALL, category)[0]
 
+      console.log('this.incomingMoneyCurrent')
+      console.log(this.incomingMoneyCurrent)
+
+
+if(this.incomingMoneyCurrent === undefined){
+  this.incomingMoneyCurrent = 0
+}
+
       let value = {
         id: NaN,
         quantityInKillo: noOfKilllos,
@@ -337,6 +371,7 @@ export class ItemRepeaterComponent implements OnInit {
     this.searcedItem = item
     console.log(this.searcedItem)
     this.hrRow = this.filterExactHr(this.humanResourcesAllType, item)[0]
+    this.setTotalPrice() ;
     this.billSummary = { totalNumberofkillos: 0, totalPrice: 0, cicarhCount: 0 }
 
     // this.addElement()
