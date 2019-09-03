@@ -56,7 +56,7 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     let temp = this.tableData.slice()
     this.dataArray = new MatTableDataSource<ManufacturersOfproductfitting>(this.tableData);
     this.dataArray.filter = ''
-    // this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     this.dataArray.paginator = this.paginator;
     console.log('my array')
     console.log(temp)
@@ -69,7 +69,7 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     this.tableData = []
     this.dataArray = new MatTableDataSource<ManufacturersOfproductfitting>(this.tableData);
     this.dataArray.filter = ''
-    // this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     this.dataArray.paginator = this.paginator;
     this.loadMatTableDataSource();
     this.service.getAllManufacturersOfProductFittingsByHr(hr).subscribe(data => {
@@ -98,7 +98,7 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     this.tableData = []
     this.dataArray = new MatTableDataSource<ManufacturersOfproductfitting>(this.tableData);
     this.dataArray.filter = ''
-    // this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
+    this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     this.dataArray.paginator = this.paginator;
     this.loadMatTableDataSource();
     this.service.getAllManufacturersOfProductFittingsByHrAndDate(hr , startDate, endDate).subscribe(data => {

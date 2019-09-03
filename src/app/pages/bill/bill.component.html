@@ -14,13 +14,13 @@
                         </mat-select>
                     </mat-form-field>
                     <br />
-                    <input type="number" formControlName="price" matInput placeholder="price">
+                    <input type="number" formControlName="price" matInput placeholder="سعر">
 
                     <div class="containerColumn">
 
                         <div formArrayName="items" *ngFor="let item of orderForm.get('items')['controls']; let i = index;">
                             <div [formGroupName]="i">
-                                <input type="number" formControlName="numberofkillos" matInput placeholder="killos">
+                                <input type="number" formControlName="numberofkillos" matInput placeholder="الكميه بالكيلو">
                             </div>
 
                         </div>
