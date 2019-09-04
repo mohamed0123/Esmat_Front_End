@@ -43,10 +43,9 @@ export class EmployeeTimeTrackerCreateComponent implements OnInit {
     this.service.insertNewEmployeeTimeTracker(this.humanResourcesAll ).subscribe(
       mdata => {
         this.onClear();
-        if (mdata != null)
+        
           this.notificationService.success('تمت العمليه بنجاح');
-        else
-          this.notificationService.warn(' لا يمكنك التعديل الا على اخر عمليه للمورد');
+          this.onClose();
 
         // this.router.navigateByUrl('/pageNotFound', { skipLocationChange: true });
         // this.router.navigate(["humanResources"]);
@@ -58,7 +57,7 @@ export class EmployeeTimeTrackerCreateComponent implements OnInit {
 
     );
 
-    this.onClose();
+   
   }
 
   onClose() {

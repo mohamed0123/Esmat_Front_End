@@ -29,7 +29,7 @@ export class CategoriesCreateComponent implements OnInit {
        mdata => {
           this.onClear();
            this.notificationService.success('تمت العمليه بنجاح');
- 
+           this.onClose();
            // this.router.navigateByUrl('/pageNotFound', { skipLocationChange: true });
            // this.router.navigate(["humanResources"]);
         },
@@ -40,7 +40,7 @@ export class CategoriesCreateComponent implements OnInit {
  
      );
      
-     this.onClose();
+   
    }
  
    onClose() {

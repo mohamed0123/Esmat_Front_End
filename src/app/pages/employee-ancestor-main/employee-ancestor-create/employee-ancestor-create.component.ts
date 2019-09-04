@@ -50,7 +50,7 @@ export class EmployeeAncestorCreateComponent implements OnInit {
           this.notificationService.success('تمت العمليه بنجاح');
         else
           this.notificationService.warn(' لا يمكنك التعديل الا على اخر عمليه ');
-
+          this.onClose();
         // this.router.navigateByUrl('/pageNotFound', { skipLocationChange: true });
         // this.router.navigate(["humanResources"]);
       },
@@ -61,7 +61,7 @@ export class EmployeeAncestorCreateComponent implements OnInit {
 
     );
 
-    this.onClose();
+  
   }
 
   onClose() {

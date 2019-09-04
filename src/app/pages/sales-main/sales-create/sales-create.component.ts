@@ -56,7 +56,7 @@ export class SalesCreateComponent implements OnInit {
           this.notificationService.success('تمت العمليه بنجاح');
         else
           this.notificationService.warn(' لا يمكنك التعديل الا على اخر عمليه للمورد');
-
+          this.onClose();
         // this.router.navigateByUrl('/pageNotFound', { skipLocationChange: true });
         // this.router.navigate(["humanResources"]);
       },
@@ -67,7 +67,7 @@ export class SalesCreateComponent implements OnInit {
 
     );
 
-    this.onClose();
+   
   }
 
   onClose() {
