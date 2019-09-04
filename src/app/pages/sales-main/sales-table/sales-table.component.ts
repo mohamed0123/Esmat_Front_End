@@ -149,7 +149,13 @@ const dialogConfig = new MatDialogConfig();
 dialogConfig.disableClose = true;
 dialogConfig.autoFocus = true;
 dialogConfig.width = "60%";
-this.dialog.open(SalesCreateComponent, dialogConfig);
+let dialogRef =   this.dialog.open(SalesCreateComponent, dialogConfig);
+
+ 
+dialogRef.afterClosed().subscribe(data=>{
+
+  this.loadDataWithCurrentDates();
+});
 }
 
 
@@ -159,7 +165,12 @@ const dialogConfig = new MatDialogConfig();
 dialogConfig.disableClose = true;
 dialogConfig.autoFocus = true;
 dialogConfig.width = "60%";
-this.dialog.open(SalesCreateComponent, dialogConfig);
+let dialogRef =   this.dialog.open(SalesCreateComponent, dialogConfig);
+dialogRef.afterClosed().subscribe(data=>{
+
+  this.loadDataWithCurrentDates();
+});
+
 }
 
 onDelete($key) {

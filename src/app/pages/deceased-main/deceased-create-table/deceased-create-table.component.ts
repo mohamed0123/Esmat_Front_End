@@ -99,7 +99,12 @@ setEndDate(event): void {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(DeceasedCreateComponent, dialogConfig);
+    let dialogRef =    this.dialog.open(DeceasedCreateComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadData();
+    });
   }
 
 
@@ -109,7 +114,12 @@ setEndDate(event): void {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(DeceasedCreateComponent, dialogConfig);
+    let dialogRef =   this.dialog.open(DeceasedCreateComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadData();
+    });
   }
 
   onDelete($key) {

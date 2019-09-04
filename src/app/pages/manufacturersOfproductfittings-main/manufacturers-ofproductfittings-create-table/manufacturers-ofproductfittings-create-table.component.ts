@@ -146,7 +146,13 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(ManufacturersOfproductfittingsCreateComponent, dialogConfig);
+    
+    let dialogRef =   this.dialog.open(ManufacturersOfproductfittingsCreateComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadDataWithCurrentDates();
+    });
+ 
   }
 
 
@@ -156,7 +162,12 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(ManufacturersOfproductfittingsCreateComponent, dialogConfig);
+    let dialogRef =   this.dialog.open(ManufacturersOfproductfittingsCreateComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadDataWithCurrentDates();
+    });
   }
 
   onDelete($key) {

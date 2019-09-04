@@ -156,7 +156,11 @@ export class EmployeeAncestorTableComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(EmployeeAncestorCreateComponent, dialogConfig);
+    let dialogRef =    this.dialog.open(EmployeeAncestorCreateComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadDataWithCurrentDates();
+    });
   }
 
 
@@ -166,7 +170,11 @@ export class EmployeeAncestorTableComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(EmployeeAncestorCreateComponent, dialogConfig);
+    let dialogRef =    this.dialog.open(EmployeeAncestorCreateComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadDataWithCurrentDates();
+    });
   }
 
   onDelete($key) {

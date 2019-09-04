@@ -151,7 +151,11 @@ export class PurchasesTableComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(PurchasesCreateComponent, dialogConfig);
+    let dialogRef =    this.dialog.open(PurchasesCreateComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadDataWithCurrentDates();
+    });
   }
 
 
@@ -161,7 +165,11 @@ export class PurchasesTableComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(PurchasesCreateComponent, dialogConfig);
+    let dialogRef =   this.dialog.open(PurchasesCreateComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadDataWithCurrentDates();
+    });
   }
 
   onDelete($key) {

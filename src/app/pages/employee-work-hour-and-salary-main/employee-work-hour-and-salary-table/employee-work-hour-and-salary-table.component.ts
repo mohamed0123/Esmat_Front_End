@@ -125,7 +125,12 @@ export class EmployeeWorkHourAndSalaryTableComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(EmployeeWorkHourAndSalaryCreateComponent, dialogConfig);
+    let dialogRef =    this.dialog.open(EmployeeWorkHourAndSalaryCreateComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadData();
+    });
   }
 
 
@@ -135,7 +140,12 @@ export class EmployeeWorkHourAndSalaryTableComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(EmployeeWorkHourAndSalaryCreateComponent, dialogConfig);
+    let dialogRef =   this.dialog.open(EmployeeWorkHourAndSalaryCreateComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadData();
+    });
   }
 
   onDelete($key) {

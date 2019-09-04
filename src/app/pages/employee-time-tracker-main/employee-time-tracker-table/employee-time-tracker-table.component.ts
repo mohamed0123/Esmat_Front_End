@@ -153,7 +153,11 @@ export class EmployeeTimeTrackerTableComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(EmployeeTimeTrackerCreateComponent, dialogConfig);
+    let dialogRef =    this.dialog.open(EmployeeTimeTrackerCreateComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadDataWithCurrentDates();
+    });
   }
 
 
@@ -163,7 +167,11 @@ export class EmployeeTimeTrackerTableComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(EmployeeTimeTrackerCreateComponent, dialogConfig);
+    let dialogRef =    this.dialog.open(EmployeeTimeTrackerCreateComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadDataWithCurrentDates();
+    });
   }
 
   onDelete($key) {

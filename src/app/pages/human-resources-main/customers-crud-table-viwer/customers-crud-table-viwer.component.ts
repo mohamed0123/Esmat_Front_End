@@ -89,7 +89,12 @@ export class CustomersCrudTableViwerComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(CustomersCrudComponent, dialogConfig);
+    let dialogRef =  this.dialog.open(CustomersCrudComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadData();
+    });
   }
 
 
@@ -99,7 +104,12 @@ export class CustomersCrudTableViwerComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(CustomersCrudComponent, dialogConfig);
+    let dialogRef =   this.dialog.open(CustomersCrudComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(data=>{
+
+      this.loadData();
+    });
   }
 
   onDelete($key) {
