@@ -61,7 +61,7 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     console.log('my array')
     console.log(temp)
     if (temp.length > 0)
-      this.totalSum = temp.reduce((a, b) => { return a + b.totalPrice } , 0)
+      this.totalSum = temp.reduce((a, b) => { return a + b.totalPrice }, 0)
     console.log(this.totalSum)
   }
 
@@ -94,14 +94,14 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
   }
 
 
-  loadDataWithDate(hr , startDate , endDate ) {
+  loadDataWithDate(hr, startDate, endDate) {
     this.tableData = []
     this.dataArray = new MatTableDataSource<ManufacturersOfproductfitting>(this.tableData);
     this.dataArray.filter = ''
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     this.dataArray.paginator = this.paginator;
     this.loadMatTableDataSource();
-    this.service.getAllManufacturersOfProductFittingsByHrAndDate(hr , startDate, endDate).subscribe(data => {
+    this.service.getAllManufacturersOfProductFittingsByHrAndDate(hr, startDate, endDate).subscribe(data => {
       if (data) {
 
         if (data.length > 0) {
@@ -128,14 +128,14 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
 
   applyFactoryNameFilter(filterValue: string) {
     this.dataArray.filter = filterValue.trim().toLowerCase();
- 
+
 
   }
 
   applyFilter(filterValue: string) {
     this.dataArray.filter = filterValue.trim().toLowerCase();
 
-   
+
 
   }
 
@@ -146,13 +146,13 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    
-    let dialogRef =   this.dialog.open(ManufacturersOfproductfittingsCreateComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(data=>{
+
+    let dialogRef = this.dialog.open(ManufacturersOfproductfittingsCreateComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data => {
 
       this.loadDataWithCurrentDates();
     });
- 
+
   }
 
 
@@ -162,9 +162,9 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    let dialogRef =   this.dialog.open(ManufacturersOfproductfittingsCreateComponent, dialogConfig);
+    let dialogRef = this.dialog.open(ManufacturersOfproductfittingsCreateComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe(data=>{
+    dialogRef.afterClosed().subscribe(data => {
 
       this.loadDataWithCurrentDates();
     });
@@ -198,28 +198,59 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
   }
 
   exportAsXLSX(): void {
-   this.excelService.exportAsExcelFile(this.tableData, 'Product fitting');
 
-  //   var tableToExcel = (function () {
-  //     var uri = 'data:application/vnd.ms-excel;base64,',
-  //         template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
-  //         , base64 = function (s) {
-  //             return window.btoa(unescape(encodeURIComponent(s)))
-  //         }
-  //         , format = function (s, c) {
-  //             return s.replace(/{(\w+)}/g, function (m, p) {
-  //                 return c[p];
-  //             })
-  //         };
-  //     return function (table, name) {
-  //         if (!table.nodeType) table = document.getElementById(table);
-  //         var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
-  //         window.location.href = uri + base64(format(template, ctx));
-  //     }
-  // })();
+    let data = []
+
+    
+    document.querySelectorAll('mat-header-row').forEach(
+      r => {
+        let row = []
+        r.querySelectorAll('mat-header-cell').forEach(e => {
+          let cell = <HTMLElement> e
+          row.push(cell.innerText)
+        })
+
+        data.push(row.slice(1))
+      }
+    )
+
+    document.querySelectorAll('mat-row').forEach(
+      r => {
+        let row = []
+        r.querySelectorAll('mat-cell').forEach(e => {
+          let cell = <HTMLElement> e
+          row.push(cell.innerText)
+        })
+
+        data.push(row.slice(1))
+      }
+    )
+
+
+     
+
+    this.excelService.exportAsExcelFile(data, 'Product fitting');
   
-  // // usage
-  // tableToExcel('#table','Export Name');
+    //   var tableToExcel = (function () {
+    //     var uri = 'data:application/vnd.ms-excel;base64,',
+    //         template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+    //         , base64 = function (s) {
+    //             return window.btoa(unescape(encodeURIComponent(s)))
+    //         }
+    //         , format = function (s, c) {
+    //             return s.replace(/{(\w+)}/g, function (m, p) {
+    //                 return c[p];
+    //             })
+    //         };
+    //     return function (table, name) {
+    //         if (!table.nodeType) table = document.getElementById(table);
+    //         var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
+    //         window.location.href = uri + base64(format(template, ctx));
+    //     }
+    // })();
+
+    // // usage
+    // tableToExcel('#table','Export Name');
   }
 
 
@@ -240,7 +271,7 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     console.log(this.searcedItem)
     this.hrRow = this.filterExactHr(this.humanResourcesAllType, item)[0]
     // this.loadData(this.filterExactHr(this.humanResourcesAllType, item)[0])
-    this.  loadDataWithCurrentDates();
+    this.loadDataWithCurrentDates();
   }
 
   _filterByDates() {
@@ -259,12 +290,12 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     //   this.totalSum = temp.reduce((a, b) => { return a + b.totalPrice } , 0)
     // console.log(this.totalSum)
 
-    this.  loadDataWithCurrentDates();
+    this.loadDataWithCurrentDates();
     //this.loadDataWithDate(this.hrRow ,  new Date(this.datePipe.transform(this.start_date , 'yyyy-MM-dd')) ,  new Date(this.datePipe.transform(this.end_date , 'yyyy-MM-dd')) );
   }
 
-  loadDataWithCurrentDates(){
-    this.loadDataWithDate(this.hrRow ,  new Date(this.datePipe.transform(this.start_date , 'yyyy-MM-dd')) ,  new Date(this.datePipe.transform(this.end_date , 'yyyy-MM-dd')) );
+  loadDataWithCurrentDates() {
+    this.loadDataWithDate(this.hrRow, new Date(this.datePipe.transform(this.start_date, 'yyyy-MM-dd')), new Date(this.datePipe.transform(this.end_date, 'yyyy-MM-dd')));
 
   }
 
@@ -276,9 +307,9 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     this.start_date = event;
   }
 
-  loadRefreshData(){
+  loadRefreshData() {
     // this.loadData(this.hrRow)
     this.loadDataWithCurrentDates();
-   }
+  }
 
 }

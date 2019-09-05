@@ -11,7 +11,7 @@
             <mat-icon>add</mat-icon>اضافه هالك
         </button>
         <button mat-button matSuffix mat-icon-button (click)="exportAsXLSX()"> <div class="icons8-microsoft-excel"></div> </button>
-        <button mat-button matSuffix mat-icon-button (click)="loadData()"> <mat-icon style="color:green">autorenew</mat-icon> </button>
+        <!-- <button mat-button matSuffix mat-icon-button (click)="loadData()"> <mat-icon style="color:green">autorenew</mat-icon> </button> -->
     
 
 
@@ -62,7 +62,7 @@
 <div class="mat-elevation-z8">
  
 
-    <mat-table [dataSource]="dataArray" matSort >
+    <mat-table id="#table" [dataSource]="dataArray" matSort >
         <ng-container matColumnDef="UPDATE">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let row">

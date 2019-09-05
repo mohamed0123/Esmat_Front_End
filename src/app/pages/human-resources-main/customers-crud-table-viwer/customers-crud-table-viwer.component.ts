@@ -138,6 +138,37 @@ export class CustomersCrudTableViwerComponent implements OnInit {
   }
 
   exportAsXLSX():void {
-    this.excelService.exportAsExcelFile(this.tableData, 'Customers');
+
+    let data = []
+
+    
+    document.querySelectorAll('mat-header-row').forEach(
+      r => {
+        let row = []
+        r.querySelectorAll('mat-header-cell').forEach(e => {
+          let cell = <HTMLElement> e
+          row.push(cell.innerText)
+        })
+
+        data.push(row.slice(1))
+      }
+    )
+
+    document.querySelectorAll('mat-row').forEach(
+      r => {
+        let row = []
+        r.querySelectorAll('mat-cell').forEach(e => {
+          let cell = <HTMLElement> e
+          row.push(cell.innerText)
+        })
+
+        data.push(row.slice(1))
+      }
+    )
+
+
+     
+
+    this.excelService.exportAsExcelFile(data, 'Customers');
   }
 }
