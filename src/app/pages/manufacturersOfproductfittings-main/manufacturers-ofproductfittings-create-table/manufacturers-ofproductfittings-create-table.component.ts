@@ -39,6 +39,7 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
     private dialogService: DialogService, private excelService: ExcelService) { }
 
   ngOnInit() {
+   
     this.hrservice.getAllHumanResourcesTyped('المصنع').subscribe(
       data => {
         this.humanResourcesAllType = data
@@ -55,6 +56,11 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
   loadMatTableDataSource() {
     let temp = this.tableData.slice()
     this.dataArray = new MatTableDataSource<ManufacturersOfproductfitting>(this.tableData);
+     
+    this.dataArray.filterPredicate = (data: any, filterValue:string) => {
+      const dataStr =JSON.stringify(data).toLowerCase();
+      return dataStr.indexOf(filterValue) != -1; 
+    }
     this.dataArray.filter = ''
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     this.dataArray.paginator = this.paginator;
@@ -68,6 +74,11 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
   loadData(hr) {
     this.tableData = []
     this.dataArray = new MatTableDataSource<ManufacturersOfproductfitting>(this.tableData);
+    
+    this.dataArray.filterPredicate = (data: any, filterValue:string) => {
+      const dataStr =JSON.stringify(data).toLowerCase();
+      return dataStr.indexOf(filterValue) != -1; 
+    }
     this.dataArray.filter = ''
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     this.dataArray.paginator = this.paginator;
@@ -97,6 +108,10 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
   loadDataWithDate(hr, startDate, endDate) {
     this.tableData = []
     this.dataArray = new MatTableDataSource<ManufacturersOfproductfitting>(this.tableData);
+    this.dataArray.filterPredicate = (data: any, filterValue:string) => {
+      const dataStr =JSON.stringify(data).toLowerCase();
+      return dataStr.indexOf(filterValue) != -1; 
+    }
     this.dataArray.filter = ''
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
     this.dataArray.paginator = this.paginator;
@@ -128,14 +143,16 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
 
   applyFactoryNameFilter(filterValue: string) {
     this.dataArray.filter = filterValue.trim().toLowerCase();
-
+   
 
   }
 
   applyFilter(filterValue: string) {
+   
+
     this.dataArray.filter = filterValue.trim().toLowerCase();
 
-
+  
 
   }
 
@@ -226,31 +243,7 @@ export class ManufacturersOfproductfittingsCreateTableComponent implements OnIni
       }
     )
 
-
-     
-
-    this.excelService.exportAsExcelFile(data, 'Product fitting');
-  
-    //   var tableToExcel = (function () {
-    //     var uri = 'data:application/vnd.ms-excel;base64,',
-    //         template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
-    //         , base64 = function (s) {
-    //             return window.btoa(unescape(encodeURIComponent(s)))
-    //         }
-    //         , format = function (s, c) {
-    //             return s.replace(/{(\w+)}/g, function (m, p) {
-    //                 return c[p];
-    //             })
-    //         };
-    //     return function (table, name) {
-    //         if (!table.nodeType) table = document.getElementById(table);
-    //         var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML};
-    //         window.location.href = uri + base64(format(template, ctx));
-    //     }
-    // })();
-
-    // // usage
-    // tableToExcel('#table','Export Name');
+    this.excelService.exportAsExcelFile(data, 'Product fitting');  
   }
 
 

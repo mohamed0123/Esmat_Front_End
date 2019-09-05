@@ -56,6 +56,10 @@ this.hrservice.getAllHumanResourcesTyped('العميل').subscribe(
 loadMatTableDataSource() {
 let temp = this.tableData.slice()
 this.dataArray = new MatTableDataSource<Sales>(this.tableData);
+this.dataArray.filterPredicate = (data: any, filterValue:string) => {
+  const dataStr =JSON.stringify(data).toLowerCase();
+  return dataStr.indexOf(filterValue) != -1; 
+}
 this.dataArray.filter = ''
 // this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 this.dataArray.paginator = this.paginator;
@@ -69,6 +73,10 @@ console.log(this.totalSum)
 loadData(hr) {
 this.tableData = []
 this.dataArray = new MatTableDataSource<Sales>(this.tableData);
+this.dataArray.filterPredicate = (data: any, filterValue:string) => {
+  const dataStr =JSON.stringify(data).toLowerCase();
+  return dataStr.indexOf(filterValue) != -1; 
+}
 this.dataArray.filter = ''
 // this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 this.dataArray.paginator = this.paginator;
@@ -99,6 +107,10 @@ loadDataWithDate(hr , startDate , endDate ) {
 console.log(hr)
 this.tableData = []
 this.dataArray = new MatTableDataSource<Sales>(this.tableData);
+this.dataArray.filterPredicate = (data: any, filterValue:string) => {
+  const dataStr =JSON.stringify(data).toLowerCase();
+  return dataStr.indexOf(filterValue) != -1; 
+}
 this.dataArray.filter = ''
 // this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 this.dataArray.paginator = this.paginator;
